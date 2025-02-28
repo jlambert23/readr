@@ -90,4 +90,12 @@ pnpm preview
 
 ## Browser Support
 
-This application uses the Web Speech API for speech recognition. Please ensure your browser supports this feature for the best experience.
+This application uses the Web Speech API for speech recognition. The following browsers currently support this feature:
+
+- **Chrome (desktop)**
+- **Safari 14.1+**
+- **Microsoft Edge**
+- **Chrome (Android)**: Note: Android OS may produce a beeping sound when activating the microphone
+- **Android WebView**
+- **Samsung Internet**
+```

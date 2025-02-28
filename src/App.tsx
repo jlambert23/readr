@@ -93,10 +93,12 @@ function App() {
   };
 
   const handleResetProgress = () => {
-    setCompletedStories([]);
-    localStorage.removeItem('completedStories');
-    setCurrentWordIndex(0);
-    resetTranscript();
+    if (window.confirm('Are you sure you want to reset all reading progress? This cannot be undone.')) {
+      setCompletedStories([]);
+      localStorage.removeItem('completedStories');
+      setCurrentWordIndex(0);
+      resetTranscript();
+    }
   };
 
   const renderText = () => {

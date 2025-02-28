@@ -41,19 +41,22 @@
   color: #888;
 }
 
+/* Main container with playful background */
 .app-container {
   margin-top: 2rem;
   padding: 2rem;
-  background: #f5f5f5;
-  border-radius: 8px;
+  background: linear-gradient(135deg, #FFE5F1 0%, #FFF9E6 100%);
+  border-radius: 20px;
   max-width: 800px;
   margin: 2rem auto;
   min-height: 100vh;
-  background-color: #f0f2f5;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: "Comic Sans MS", cursive, sans-serif;
   overflow-x: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  border: 3px solid #FFB6C1;
 }
 
+/* Playful button styles */
 .controls {
   display: flex;
   gap: 1rem;
@@ -61,32 +64,38 @@
 }
 
 .controls button {
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
   border: none;
-  background: #646cff;
+  background: #FF8DC7;
   color: white;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .controls button:hover {
-  background: #535bf2;
+  background: #FF6BB3;
+  transform: scale(1.05) rotate(-2deg);
 }
 
+/* Status with fun animation */
 .status {
   margin: 1rem 0;
-  padding: 1rem;
-  background: white;
-  border-radius: 8px;
-  color: #2a2a2a;
-  font-weight: 500;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
+  padding: 1.2rem;
+  background: #FFF5F8;
+  border-radius: 15px;
+  color: #FF4D94;
+  font-weight: 600;
+  box-shadow: 0 4px 8px rgba(255,77,148,0.1);
+  transition: all 0.3s ease;
+  border: 2px dashed #FFB6C1;
 }
 
 .status:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px) rotate(1deg);
 }
 
 .transcript-container {
@@ -163,26 +172,23 @@ select:focus {
   cursor: pointer;
 }
 
-/* Add some playful decorative elements */
+/* Fun decorative elements */
 .app-container::before {
   content: "📚";
   position: fixed;
   top: 20px;
   left: 20px;
-  font-size: 40px;
-  animation: float 3s ease-in-out infinite;
-  z-index: 1;
+  font-size: 50px;
+  animation: bounce 2s ease-in-out infinite;
 }
 
 .app-container::after {
-  content: "🌈";
+  content: "🌟";
   position: fixed;
   bottom: 20px;
   right: 20px;
-  font-size: 40px;
-  animation: float 3s ease-in-out infinite;
-  animation-delay: 1.5s;
-  z-index: 1;
+  font-size: 50px;
+  animation: spin 4s linear infinite;
 }
 
 .collapsible-button {
@@ -202,8 +208,13 @@ select:focus {
 }
 
 @keyframes bounce {
-  from { transform: translateY(0); }
-  to { transform: translateY(-10px); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* Layout and containers */
@@ -242,14 +253,19 @@ select:focus {
   font-size: 20px;
   border-radius: 25px;
   border: 3px solid #FFB6C1;
-  background-color: #FFF5EE;
-  color: #4A154B;
+  background-color: white;
+  color: #FF69B4;
   cursor: pointer;
   font-family: "Comic Sans MS", cursive, sans-serif;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(255,182,193,0.3);
 }
 
-/* Reading container styles */
+.story-select:hover {
+  transform: scale(1.02);
+  border-color: #FF69B4;
+}
+
+/* Reading container with softer colors */
 .reading-area {
   max-width: 800px;
   margin: 20px auto;
@@ -257,33 +273,34 @@ select:focus {
   line-height: 2;
   text-align: left;
   padding: 30px;
-  background-color: rgba(255,255,255,0.9);
+  background-color: rgba(255,255,255,0.95);
   border-radius: 25px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  border: 3px solid #FFE4E1;
 }
 
 .word {
-  margin: 0 4px;
-  padding: 4px 12px;
+  margin: 0 6px;
+  padding: 6px 14px;
   border-radius: 20px;
   transition: all 0.4s ease;
   display: inline-block;
   margin-bottom: 12px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   font-size: 28px;
   font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 .word-read {
   background-color: #FFB6C1;
-  color: #4A154B;
+  color: #FF1493;
 }
 
 .word-unread {
-  background-color: #FFF5EE;
-  color: #6B4423;
+  background-color: #FFF0F5;
+  color: #FF69B4;
 }
 
+/* Achievement message */
 .completion-message {
   margin-top: 20px;
   padding: 20px;
@@ -292,6 +309,17 @@ select:focus {
   border-radius: 25px;
   text-align: center;
   animation: bounce 0.5s ease infinite alternate;
+  background: linear-gradient(135deg, #FFB6C1 0%, #FFE4E1 100%);
+  padding: 20px;
+  border-radius: 20px;
+  text-align: center;
+  animation: pop 0.5s ease;
+  border: 3px dashed #FF69B4;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 .completion-title {

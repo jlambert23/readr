@@ -92,6 +92,13 @@ function App() {
     }
   };
 
+  const handleResetProgress = () => {
+    setCompletedStories([]);
+    localStorage.removeItem('completedStories');
+    setCurrentWordIndex(0);
+    resetTranscript();
+  };
+
   const renderText = () => {
     const words = selectedStory.text.split(/\s+/);
     const isStoryComplete = currentWordIndex >= words.length;
@@ -169,6 +176,13 @@ function App() {
             </option>
           ))}
         </select>
+        <button 
+          onClick={handleResetProgress}
+          className="control-button reset-button"
+          style={{ marginLeft: '10px' }}
+        >
+          🗑️ Reset Progress
+        </button>
       </div>
 
       <div className="reading-area">

@@ -12,17 +12,6 @@ An interactive reading application built with React, TypeScript, and Vite that h
 - 🌟 Encouraging completion messages
 - 🎯 Interactive UI with visual feedback
 
-## Technical Stack
-
-- React + TypeScript
-- Vite for build tooling
-- Speech Recognition API
-- ESLint for code quality
-
-## Development Setup
-
-This project uses Vite with HMR and ESLint rules. It uses [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) which leverages [Babel](https://babeljs.io/) for Fast Refresh.
-
 ## Installation
 
 ```bash
@@ -43,7 +32,7 @@ pnpm preview
 
 This application uses the Web Speech API for speech recognition. The following browsers currently support this feature:
 
-- **Chrome (desktop)**
+- **Chrome (desktop)**: Best experience with full support
 - **Safari 14.1+**
 - **Microsoft Edge**
 - **Chrome (Android)**: Note: Android OS may produce a beeping sound when activating the microphone

@@ -2,7 +2,7 @@
 
 An interactive reading application built with React, TypeScript, and Vite that helps users practice reading stories out loud. The app uses speech recognition to track reading progress and provide an engaging learning experience.
 
-🌐 **Try it out**: <a href="https://jlambert23.github.io/readr/" target="_blank">https://jlambert23.github.io/readr/</a>
+🌐 **Try it out**: [https://jlambert23.github.io/readr/](https://jlambert23.github.io/readr/)
 
 ## Features
 

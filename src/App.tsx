@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import './App.css';
 import { stories } from './data/stories';
@@ -8,6 +8,20 @@ function App() {
   const [selectedStory, setSelectedStory] = useState(stories[0]);
   const [currentWordIndex, setCurrentWordIndex] = useState<number>(0);
   const [showTranscript, setShowTranscript] = useState<boolean>(false);
+  const [completedStories, setCompletedStories] = useState<number[]>(() => {
+    const saved = localStorage.getItem('completedStories');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  const markStoryComplete = useCallback((storyId: number) => {
+    if (!completedStories.includes(storyId)) {
+      setCompletedStories([...completedStories, storyId]);
+    }
+  }, [completedStories]);
+
+  const areAllStoriesCompleted = useCallback(() => {
+    return stories.every(story => completedStories.includes(story.id));
+  }, [completedStories]);
   
   const {
     transcript,
@@ -44,6 +58,18 @@ function App() {
         setError('Microphone access denied. Please allow microphone access in your browser settings.');
       });
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('completedStories', JSON.stringify(completedStories));
+  }, [completedStories]);
+
+  useEffect(() => {
+    const words = selectedStory.text.split(/\s+/);
+    const isStoryComplete = currentWordIndex >= words.length;
+    if (isStoryComplete) {
+      markStoryComplete(selectedStory.id);
+    }
+  }, [currentWordIndex, selectedStory, markStoryComplete]);
 
   if (!browserSupportsSpeechRecognition) {
     return <div>Browser doesn't support speech recognition.</div>;
@@ -90,11 +116,19 @@ function App() {
         ))}
         {isStoryComplete && (
           <div className="completion-message">
-            <h3 className="completion-title">
-              🌟 Wow! Amazing Job! 🎉
-              <br/>
-              <span className="completion-subtitle">You're a super star reader! ⭐️</span>
-            </h3>
+            {areAllStoriesCompleted() ? (
+              <h3 className="completion-title">
+                🎓 Congratulations! You've completed all the stories! 🏆
+                <br/>
+                <span className="completion-subtitle">You're an amazing reader! Keep it up! 🌈</span>
+              </h3>
+            ) : (
+              <h3 className="completion-title">
+                🌟 Wow! Amazing Job! 🎉
+                <br/>
+                <span className="completion-subtitle">You're a super star reader! ⭐️</span>
+              </h3>
+            )}
             <button 
               onClick={handleNextStory}
               className="control-button next-story-button"
@@ -127,8 +161,11 @@ function App() {
           }}
         >
           {stories.map(story => (
-            <option key={story.id} value={story.id}>
-              {story.title}
+            <option 
+              key={story.id} 
+              value={story.id}
+            >
+              {story.title} {completedStories.includes(story.id) ? '✅' : ''}
             </option>
           ))}
         </select>

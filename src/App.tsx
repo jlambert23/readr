@@ -155,34 +155,36 @@ function App() {
       {error && <div className="error-message">{error}</div>}
       
       <div className="story-selector-container">
-        <select 
-          value={selectedStory.id}
-          className="story-select"
-          onChange={(e) => {
-            const story = stories.find(s => s.id === Number(e.target.value));
-            if (story) {
-              setSelectedStory(story);
-              resetTranscript();
-              setCurrentWordIndex(0);
-            }
-          }}
-        >
-          {stories.map(story => (
-            <option 
-              key={story.id} 
-              value={story.id}
-            >
-              {story.title} {completedStories.includes(story.id) ? '✅' : ''}
-            </option>
-          ))}
-        </select>
-        <button 
-          onClick={handleResetProgress}
-          className="control-button reset-button"
-          style={{ marginLeft: '10px' }}
-        >
-          🗑️ Reset Progress
-        </button>
+        <div className="story-selector-flex">
+          <select 
+            value={selectedStory.id}
+            className="story-select"
+            onChange={(e) => {
+              const story = stories.find(s => s.id === Number(e.target.value));
+              if (story) {
+                setSelectedStory(story);
+                resetTranscript();
+                setCurrentWordIndex(0);
+              }
+            }}
+          >
+            {stories.map(story => (
+              <option 
+                key={story.id} 
+                value={story.id}
+              >
+                {story.title} {completedStories.includes(story.id) ? '✅' : ''}
+              </option>
+            ))}
+          </select>
+          <button 
+            onClick={handleResetProgress}
+            className="reset-progress-button"
+            title="Clear all reading progress"
+          >
+            🗑️
+          </button>
+        </div>
       </div>
 
       <div className="reading-area">

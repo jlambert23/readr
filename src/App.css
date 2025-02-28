@@ -246,6 +246,14 @@ select:focus {
 .story-selector-container {
   margin: 20px 0;
   text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.story-selector-flex {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .story-select {
@@ -449,4 +457,14 @@ select:focus {
 .next-story-button:hover {
   transform: scale(1.05);
   background-color: #45a049;
+}
+
+.reset-progress-button {
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 0.8em;
+  cursor: pointer;
+  padding: 4px 8px;
+  opacity: 0.7;
 }
